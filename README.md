@@ -42,25 +42,24 @@
 | ---------------- | ---------- | ----------------------------- |
 | user             | references | null: false foreign_key: true |
 | product_listing  | references | null: false foreign_key: true |
-| product_purchase | references | null: false foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :product_listing
-- belongs_to :product_purchase
+- has_one    :product_purchase
 
 ## product_purchases テーブル
-| Column          | Type       | Option                        |
-| --------------- | ---------- | ----------------------------- |
-| post            | string     | null: false                   |
-| area_id         | integer    | null: false                   |
-| municipality    | string     | null: false                   |
-| address         | string     | null: false                   |
-| building        | string     | null: true                    |
-| phone_number    | string     | null: false                   |
-
+| Column                | Type       | Option                        |
+| --------------------- | ---------- | ----------------------------- |
+| post                  | string     | null: false                   |
+| area_id               | integer    | null: false                   |
+| municipality          | string     | null: false                   |
+| address               | string     | null: false                   |
+| building              | string     | null: true                    |
+| phone_number          | string     | null: false                   |
+| product_purchase_user | references | null: false foreign_key: true |
 
 ### Association
 
-- has_one :product_purchase_user
+- belongs_to :product_purchases_users
