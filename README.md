@@ -62,4 +62,4 @@
 
 ### Association
 
-- belongs_to :product_purchases_users
+- belongs_to :product_purchase_user
