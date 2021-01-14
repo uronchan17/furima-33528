@@ -9,9 +9,10 @@ class ProductListing < ApplicationRecord
 
   validates :product_name, presence: true
   validates :explain, presence: true
-  validates :category_id, numericality: { other_than: 1 }
-  validates :state_id, numericality: { other_than: 1 }
-  validates :delivery_fee_id, numericality: { other_than: 1 }
-  validates :area_id, numericality: { other_than: 1 }
-  validates :days_to_ship_id, numericality: { other_than: 1 }
+  validates :category_id, numericality: { other_than: 1 }, presence:true
+  validates :state_id, numericality: { other_than: 1 }, presence: true
+  validates :delivery_fee_id, numericality: { other_than: 1 }, presence: true
+  validates :area_id, numericality: { other_than: 1 }, presence: true
+  validates :days_to_ship_id, numericality: { other_than: 1 }, presence: true
+  validates :fee, presence: true
 end
