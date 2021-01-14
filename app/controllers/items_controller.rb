@@ -4,15 +4,21 @@ class ItemsController < ApplicationController
   end
   
   def new
+    @product_listing = ProductListing.new
   end
 
   def create
-    ProductListing.create(items_params)
+    @product_listing = ProductListing.new(items_params)
+    if @product_listing.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
   def items_params
-    params.require(:product_listing).permit(:product_name, :explain, :category_id, :state_id, :delivery_id, :area_id, :date_id, :fee).merge(user_id: current.user.id)
+    params.require(:product_listing).permit(:product_name, :explain, :category_id, :state_id, :delivery_fee_id, :area_id, :days_to_ship_id, :fee).merge(user_id: current_user.id)
   end
 
   def move_to_session
