@@ -20,4 +20,5 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   include ActiveHash::Associations
   has_many :product_listings
+  
 end

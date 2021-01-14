@@ -8,9 +8,8 @@ class CreateProductListings < ActiveRecord::Migration[6.0]
       t.integer    :delivery_fee_id
       t.integer    :area_id
       t.integer    :days_to_ship_id
-      t.integer    :delivery_fee_id
       t.references :user, foreign_key: true
-
+      t.integer    :fee
       t.timestamps
     end
   end

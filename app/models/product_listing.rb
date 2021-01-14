@@ -6,4 +6,12 @@ class ProductListing < ApplicationRecord
   belongs_to :delivery_fee
   belongs_to :area
   belongs_to :days_to_ship
+
+  validates :product_name, presence: true
+  validates :explain, presence: true
+  validates :category_id, numericality: { other_than: 1 }
+  validates :state_id, numericality: { other_than: 1 }
+  validates :delivery_fee_id, numericality: { other_than: 1 }
+  validates :area_id, numericality: { other_than: 1 }
+  validates :days_to_ship_id, numericality: { other_than: 1 }
 end
