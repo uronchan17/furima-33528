@@ -10,11 +10,13 @@ class ProductListing < ApplicationRecord
 
   validates :product_name, presence: true
   validates :explain, presence: true
-  validates :category_id, numericality: { other_than: 1 }, presence:true
-  validates :state_id, numericality: { other_than: 1 }, presence: true
-  validates :delivery_fee_id, numericality: { other_than: 1 }, presence: true
+  with_options :numericality: { other_than: 1 }, presence:true do
+    validates :category_id
+    validates :state_id
+    validates :delivery_fee_id
+    validates :days_to_ship_id
+  end
   validates :area_id, numericality: { only_integer: true }, presence: true
-  validates :days_to_ship_id, numericality: { other_than: 1 }, presence: true
   with_options presence: true, inclusion: {in: 300..9999999}, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' } do
     validates :fee
   end
