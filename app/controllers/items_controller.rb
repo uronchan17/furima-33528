@@ -21,12 +21,6 @@ class ItemsController < ApplicationController
     @product_listing = ProductListing.find(params[:id])
   end
 
-  def edit
-  end
-
-  def destroy
-  end
-
   private
 
   def items_params
