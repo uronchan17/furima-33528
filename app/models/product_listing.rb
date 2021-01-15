@@ -7,7 +7,7 @@ class ProductListing < ApplicationRecord
   belongs_to :delivery_fee
   belongs_to :area
   belongs_to :days_to_ship
-  with_options presence:true do
+  with_options presence: true do
     validates :product_name
     validates :explain
     with_options numericality: { other_than: 1 } do
@@ -17,7 +17,7 @@ class ProductListing < ApplicationRecord
       validates :days_to_ship_id
     end
     validates :area_id, numericality: { only_integer: true }
-    validates :fee, inclusion: {in: 300..9999999}, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
+    validates :fee, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
     validates :image
   end
 end
