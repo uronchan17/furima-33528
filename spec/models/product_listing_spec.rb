@@ -8,6 +8,11 @@ RSpec.describe ProductListing, type: :model do
 
   describe '商品登録' do
     context '商品登録できないとき' do
+      it "imageが空では登録できない" do
+        @product.image = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Image can't be blank")
+      end
       it 'product_nameが空では登録できない' do
         @product.product_name = ""
         @product.valid?
@@ -98,8 +103,28 @@ RSpec.describe ProductListing, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Fee is not included in the list")
       end
-      it 'feeが300~9999999の範囲の数値でなければ登録できない' do
-        @product.fee = 150
+      it 'feeが全角文字だけでは登録できない' do
+        @product.fee = "あああ"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Fee is not included in the list")
+      end
+      it '半角英数混合では登録できない' do
+        @product.fee = "a300b"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Fee is not included in the list")
+      end
+      it '半角英語だけでは登録できない' do
+        @product.fee = "abc"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Fee is not included in the list")
+      end
+      it '299円以下では登録できない' do
+        @product.fee = 299
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Fee is not included in the list")
+      end
+      it '10000000以上では登録できない' do
+        @product.fee = 10000000
         @product.valid?
         expect(@product.errors.full_messages).to include("Fee is not included in the list")
       end

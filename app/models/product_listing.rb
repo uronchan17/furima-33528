@@ -10,7 +10,7 @@ class ProductListing < ApplicationRecord
 
   validates :product_name, presence: true
   validates :explain, presence: true
-  with_options :numericality: { other_than: 1 }, presence:true do
+  with_options numericality: { other_than: 1 }, presence:true do
     validates :category_id
     validates :state_id
     validates :delivery_fee_id
