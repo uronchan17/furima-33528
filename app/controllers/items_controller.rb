@@ -22,6 +22,16 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @product_listing = ProductListing.find(params[:id])
+  end
+
+  def update
+    @product_listing = ProductListing.find(params[:id])
+    if @product_listing.update(items_params)
+      redirect_to item_path(@product_listing.id)
+    else
+      render:edit
+    end
   end
 
   private
