@@ -23,9 +23,7 @@ class ItemsController < ApplicationController
 
   def edit
     set_product_listing
-    unless current_user.id == @product_listing.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @product_listing.user_id
   end
 
   def update
@@ -33,7 +31,7 @@ class ItemsController < ApplicationController
     if @product_listing.update(items_params)
       redirect_to item_path(@product_listing.id)
     else
-      render:edit
+      render :edit
     end
   end
 
