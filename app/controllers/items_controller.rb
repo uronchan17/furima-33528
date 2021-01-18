@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit]
   def index
     @product_listings = ProductListing.all.order('created_at DESC')
   end
@@ -23,6 +23,9 @@ class ItemsController < ApplicationController
 
   def edit
     @product_listing = ProductListing.find(params[:id])
+    unless current_user.id == @product_listing.user_id
+      redirect_to root_path
+    end
   end
 
   def update
