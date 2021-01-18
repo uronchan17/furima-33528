@@ -18,18 +18,18 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @product_listing = ProductListing.find(params[:id])
+    set_product_listing
   end
 
   def edit
-    @product_listing = ProductListing.find(params[:id])
+    set_product_listing
     unless current_user.id == @product_listing.user_id
       redirect_to root_path
     end
   end
 
   def update
-    @product_listing = ProductListing.find(params[:id])
+    set_product_listing
     if @product_listing.update(items_params)
       redirect_to item_path(@product_listing.id)
     else
@@ -38,6 +38,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def set_product_listing
+    @product_listing = ProductListing.find(params[:id])
+  end
 
   def items_params
     params.require(:product_listing).permit(:product_name, :explain, :category_id, :state_id, :delivery_fee_id, :area_id,
