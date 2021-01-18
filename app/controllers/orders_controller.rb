@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    binding.pry
     @order_form = OrderForm.new(purchase_params)
     @order_form.save
   end
