@@ -1,6 +1,6 @@
 class OrderForm
   include ActiveModel::Model
-  attr_accessor :post, :area_id, :municipality, :building, :phone_number, :address
+  attr_accessor :post, :area_id, :municipality, :building, :phone_number, :address, :item_id, :user_id, :product_listing_id
   VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
   with_options presence: true do
     validates :post, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
@@ -11,7 +11,7 @@ class OrderForm
   end
 
   def save
-    product = ProductPurchaseUser.create(product_listing_id: params[:item_id]).merge(user_id: current_user.id)
+    product = ProductPurchaseUser.create!(product_listing_id: product_listing_id, user_id: user_id)
     Order.create(post: post, area_id: area_id, municipality: municipality, building: building, phone_number: phone_number, address: address, product_purchase_user_id: product.id)
   end
 end
