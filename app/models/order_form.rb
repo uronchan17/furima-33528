@@ -12,7 +12,7 @@ class OrderForm
   end
 
   def save
-    Payjp.api_key = "sk_test_653263e0478df5ce701bc2e1"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: price,
       card: token,
