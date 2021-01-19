@@ -6,6 +6,9 @@ class OrdersController < ApplicationController
     if current_user.id == @product.user_id
       redirect_to root_path
     end
+    if ProductPurchaseUser.exists?(product_listing_id: params[:item_id])
+      redirect_to root_path
+    end
   end
 
   def create
