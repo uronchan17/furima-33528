@@ -6,9 +6,12 @@ class OrdersController < ApplicationController
 
   def create
     @order_form = OrderForm.new(purchase_params)
-    
-    @order_form.save
-    redirect_to root_path
+    if @order_form.valid?
+      @order_form.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private

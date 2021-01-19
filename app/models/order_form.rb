@@ -8,6 +8,7 @@ class OrderForm
     validates :municipality
     validates :address
     validates :phone_number, format: { with: VALID_PHONE_REGEX }
+    validates :token
   end
 
   def save
