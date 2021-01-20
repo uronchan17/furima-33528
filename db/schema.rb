@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_14_024124) do
+ActiveRecord::Schema.define(version: 2021_01_18_095404) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 2021_01_14_024124) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "post"
+    t.integer "area_id"
+    t.string "municipality"
+    t.string "building"
+    t.string "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "product_purchase_user_id", null: false
+    t.string "address"
+    t.index ["product_purchase_user_id"], name: "index_orders_on_product_purchase_user_id"
+  end
+
   create_table "product_listings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "product_name"
     t.text "explain"
@@ -46,6 +59,15 @@ ActiveRecord::Schema.define(version: 2021_01_14_024124) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_product_listings_on_user_id"
+  end
+
+  create_table "product_purchase_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "product_listing_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_listing_id"], name: "index_product_purchase_users_on_product_listing_id"
+    t.index ["user_id"], name: "index_product_purchase_users_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -67,5 +89,8 @@ ActiveRecord::Schema.define(version: 2021_01_14_024124) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders", "product_purchase_users"
   add_foreign_key "product_listings", "users"
+  add_foreign_key "product_purchase_users", "product_listings"
+  add_foreign_key "product_purchase_users", "users"
 end

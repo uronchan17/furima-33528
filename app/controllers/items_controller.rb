@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path if ProductPurchaseUser.exists?(product_listing_id: @product_listing.id)
     redirect_to root_path unless current_user.id == @product_listing.user_id
   end
 
@@ -34,9 +35,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @product_listing.user_id
-      @product_listing.destroy
-    end
+    @product_listing.destroy if current_user.id == @product_listing.user_id
     redirect_to root_path
   end
 

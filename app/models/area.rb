@@ -20,4 +20,5 @@ class Area < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :product_listings
+  has_many :orders
 end

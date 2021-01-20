@@ -132,10 +132,11 @@
           <div class='item-img-content'>
             <%= image_tag product.image, class: "item-img" %>
 
-            <%# 商品が売れていればsold outを表示しましょう %>
+            <% if ProductPurchaseUser.exists?(product_listing_id: product.id)%>
             <div class='sold-out'>
               <span>Sold Out!!</span>
             </div>
+            <% end %>
             <%# //商品が売れていればsold outを表示しましょう %>
 
           </div>
