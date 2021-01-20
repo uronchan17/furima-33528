@@ -16,12 +16,6 @@ class OrderForm
   end
 
   def save
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    Payjp::Charge.create(
-      amount: price,
-      card: token,
-      currency: 'jpy'
-    )
     product = ProductPurchaseUser.create(product_listing_id: product_listing_id, user_id: user_id)
     Order.create(post: post, area_id: area_id, municipality: municipality, building: building, phone_number: phone_number,
                  address: address, product_purchase_user_id: product.id)

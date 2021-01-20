@@ -3,6 +3,14 @@ require 'rails_helper'
 RSpec.describe OrderForm, type: :model do
   before do
     @order = FactoryBot.build(:order_form)
+    @user = FactoryBot.build(:user)
+    @product = FactoryBot.build(:product_listing)
+    @product.image = fixture_file_upload('app/assets/images/furima-footer.png')
+    @user.save
+    @product.save
+    sleep 1
+    @order.user_id = @user.id
+    @order.product_listing_id = @product.id
   end
   describe '購入者情報登録' do
     context '購入者情報が登録できるとき' do
@@ -77,6 +85,11 @@ RSpec.describe OrderForm, type: :model do
       end
       it 'phone_numberは数字でなければ登録できない' do
         @order.phone_number = 'ああああaaaaaa'
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberは英数混合では登録できない' do
+        @order.phone_number = "1a1a1a1a1a"
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number is invalid')
       end

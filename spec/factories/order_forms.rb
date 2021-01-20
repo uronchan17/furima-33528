@@ -8,7 +8,5 @@ FactoryBot.define do
     municipality { '札幌市' }
     building { '建物' }
     phone_number { '08095426650' }
-    user_id { 1 }
-    product_listing_id { 1 }
   end
 end
