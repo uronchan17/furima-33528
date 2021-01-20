@@ -3,7 +3,9 @@ class OrdersController < ApplicationController
   def index
     @product = ProductListing.find(params[:item_id])
     @order_form = OrderForm.new
-    redirect_to root_path if current_user.id == @product.user_id || ProductPurchaseUser.exists?(product_listing_id: params[:item_id])
+    if current_user.id == @product.user_id || ProductPurchaseUser.exists?(product_listing_id: params[:item_id])
+      redirect_to root_path
+    end
   end
 
   def create
@@ -15,7 +17,6 @@ class OrdersController < ApplicationController
     else
       render :index
     end
-    
   end
 
   private

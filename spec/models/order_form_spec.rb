@@ -89,7 +89,7 @@ RSpec.describe OrderForm, type: :model do
         expect(@order.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberは英数混合では登録できない' do
-        @order.phone_number = "1a1a1a1a1a"
+        @order.phone_number = '1a1a1a1a1a'
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number is invalid')
       end
