@@ -22,6 +22,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if ProductPurchaseUser.exists?(product_listing_id: @product_listing.id)
+      redirect_to root_path
+    end
     redirect_to root_path unless current_user.id == @product_listing.user_id
   end
 
