@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
 
   def purchase_params
     @product = ProductListing.find(params[:item_id])
-    params.require(:order_form).permit(:post, :area_id, :municipality, :address, :building, :phone_number, :item_id).merge(
+    params.require(:order_form).permit(:post, :area_id, :municipality, :address, :building, :phone_number).merge(
       user_id: current_user.id, product_listing_id: @product.id, token: params[:token], price: @product.fee
     )
   end
