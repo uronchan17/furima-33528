@@ -29,9 +29,8 @@
         <% unless ProductPurchaseUser.exists?(product_listing_id: @product_listing.id) then %>
         <%= link_to '商品の編集', edit_item_path(@product_listing.id), method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
-        <% end %>
         <%= link_to '削除', item_path(@product_listing.id), method: :delete, class:'item-destroy' %>
-
+        <% end %>
       <% else %>
 
         <% unless ProductPurchaseUser.exists?(product_listing_id: @product_listing.id)  then %>
