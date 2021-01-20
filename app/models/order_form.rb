@@ -9,6 +9,9 @@ class OrderForm
     validates :address
     validates :phone_number, format: { with: VALID_PHONE_REGEX }
     validates :token
+    validates :price
+    validates :product_listing_id
+    validates :user_id
   end
 
   def save
