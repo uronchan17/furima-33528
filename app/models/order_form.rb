@@ -22,7 +22,7 @@ class OrderForm
       card: token,
       currency: 'jpy'
     )
-    product = ProductPurchaseUser.create!(product_listing_id: product_listing_id, user_id: user_id)
+    product = ProductPurchaseUser.create(product_listing_id: product_listing_id, user_id: user_id)
     Order.create(post: post, area_id: area_id, municipality: municipality, building: building, phone_number: phone_number,
                  address: address, product_purchase_user_id: product.id)
   end
