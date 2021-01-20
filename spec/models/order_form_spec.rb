@@ -6,6 +6,9 @@ RSpec.describe OrderForm, type: :model do
   end
   describe '購入者情報登録' do
     context '購入者情報が登録できるとき' do
+      it '全てのカラムが存在するとき' do
+        expect(@order).to be_valid
+      end
       it 'building以外のカラムが全て存在するとき' do
         @order.building = ''
         expect(@order).to be_valid
